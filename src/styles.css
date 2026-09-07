@@ -301,7 +301,9 @@ button {
 .field textarea,
 .field select {
   width: 100%;
-  padding: 12px 14px;
+  min-height: 50px;
+  padding: 13px 15px;
+  font-size: 16px; /* 16px 미만이면 아이폰에서 화면이 확대됩니다 */
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-strong);
   background: #fffdfb;
@@ -311,7 +313,7 @@ button {
 
 .field textarea {
   resize: vertical;
-  min-height: 82px;
+  min-height: 88px;
   line-height: 1.6;
 }
 
@@ -348,15 +350,16 @@ button {
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
 }
 
 .chip {
-  padding: 8px 13px;
+  min-height: 44px;
+  padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid var(--border-strong);
   background: #fffdfb;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-soft);
   transition: all 0.15s ease;
 }
@@ -374,9 +377,10 @@ button {
 
 .btn-primary {
   width: 100%;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 15px;
+  min-height: 56px;
+  margin-top: 22px;
+  padding: 17px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #ec9077, var(--primary-dark));
   color: #fff;
   font-size: 15.5px;
@@ -399,8 +403,9 @@ button {
 
 .btn-ghost {
   width: 100%;
-  margin-top: 10px;
-  padding: 13px;
+  min-height: 50px;
+  margin-top: 12px;
+  padding: 14px;
   border-radius: 14px;
   background: var(--surface);
   border: 1px solid var(--border-strong);
@@ -461,7 +466,7 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
 }
 
 .tag {
@@ -481,14 +486,17 @@ button {
 }
 
 .copy-btn {
-  margin-left: auto;
-  padding: 6px 12px;
-  border-radius: 999px;
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 13px;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid var(--border-strong);
-  font-size: 12px;
-  color: var(--text-soft);
-  background: #fffdfb;
-  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-dark);
+  background: var(--primary-soft);
   transition: all 0.15s ease;
 }
 
@@ -681,6 +689,212 @@ button {
   }
 }
 
+/* ---------- 입력 폼 안내 ---------- */
+
+.form-guide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: -4px 0 20px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-soft);
+  font-size: 12.8px;
+  line-height: 1.6;
+  color: var(--text-soft);
+}
+
+.form-guide b {
+  color: var(--primary-dark);
+}
+
+.link-btn {
+  margin-left: auto;
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--primary-dark);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.link-btn:active {
+  transform: scale(0.96);
+}
+
+.field-help {
+  margin: -3px 0 8px;
+  font-size: 12.2px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.req,
+.opt {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  vertical-align: 1px;
+}
+
+.req {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+}
+
+.opt {
+  background: #f4efeb;
+  color: var(--muted);
+}
+
+.form-hint {
+  margin: 11px 0 0;
+  text-align: center;
+  font-size: 12.3px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ---------- 큰 선택 버튼 (영상 길이) ---------- */
+
+.option-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.option {
+  min-height: 66px;
+  padding: 12px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: #fffdfb;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.option:active {
+  transform: scale(0.97);
+}
+
+.option .o-title {
+  display: block;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 3px;
+}
+
+.option .o-desc {
+  display: block;
+  font-size: 10.8px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.option.on {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.option.on .o-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.result-hint {
+  margin-bottom: 13px;
+  padding: 13px 15px;
+  border-radius: var(--radius-sm);
+  background: var(--lilac-soft);
+  color: #5f5578;
+  font-size: 12.8px;
+  line-height: 1.65;
+}
+
+/* ---------- 결과 화면 버튼 두 개 ---------- */
+
+.result-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.result-actions .act {
+  min-height: 52px;
+  padding: 14px 8px;
+  border-radius: 14px;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  transition: all 0.15s ease;
+}
+
+.result-actions .act:active {
+  transform: scale(0.97);
+}
+
+.act-copy {
+  background: linear-gradient(135deg, #ec9077, var(--primary-dark));
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(226, 132, 106, 0.26);
+}
+
+.act-copy.done {
+  background: var(--mint);
+  box-shadow: none;
+}
+
+.act-again {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--text-soft);
+}
+
+.results-head.sub {
+  margin-top: 26px;
+}
+
+/* ---------- 도구 화면 사용 순서 안내 ---------- */
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.3px;
+  color: var(--text-soft);
+}
+
+.steps .n {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 10.5px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
 @media (min-width: 560px) {
   body {
     font-size: 15.5px;
@@ -702,5 +916,9 @@ button {
   }
   .panel {
     padding: 24px 22px;
+  }
+  .result-actions .act {
+    min-height: 54px;
+    font-size: 15px;
   }
 }

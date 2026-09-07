@@ -10,35 +10,35 @@ const TOOLS = [
     id: 'name',
     emoji: '🛒',
     title: '상품명 만들기',
-    desc: '검색에 잘 걸리는 이름을 스타일별로 8개',
+    desc: '스타일별 이름 9개 · 검색 잘 되는 이름 포함',
     Comp: ProductNameTool,
   },
   {
     id: 'detail',
     emoji: '📝',
     title: '상세페이지 만들기',
-    desc: '첫 문구부터 자주 묻는 질문까지 한 번에',
+    desc: '첫 문구 + 본문 전체 + 자주 묻는 질문',
     Comp: DetailPageTool,
   },
   {
     id: 'insta',
     emoji: '📸',
     title: '인스타 홍보글 만들기',
-    desc: '해시태그까지 붙은 피드 글 3개',
+    desc: '피드 글 3개 + 해시태그 자동 조합',
     Comp: InstagramTool,
   },
   {
     id: 'shorts',
     emoji: '🎬',
     title: '쇼츠 대본 만들기',
-    desc: '몇 초에 뭘 찍고 뭘 말할지 정해서',
+    desc: '15 · 30 · 60초 대본 + 촬영 순서',
     Comp: ShortsTool,
   },
   {
     id: 'margin',
     emoji: '💰',
     title: '판매가 / 마진 계산',
-    desc: '수수료 빼고 실제로 남는 돈 확인',
+    desc: '수수료·광고비 빼고 실제로 남는 돈',
     Comp: MarginTool,
   },
 ];
@@ -113,8 +113,9 @@ export default function App() {
 
           <div className="home-note">
             <b>처음이신가요?</b> 어떤 걸 눌러도 <b>상품 이름 하나만</b> 적으면 결과가 나와요.
-            자랑하고 싶은 점까지 적어주시면 훨씬 더 좋은 문구가 나옵니다. 만들어진 글은 복사해서
-            스마트스토어·인스타그램에 바로 붙여 쓰세요.
+            특징·타겟·가격대까지 채우면 문구가 훨씬 좋아집니다. 감이 안 잡히면 각 화면의{' '}
+            <b>"예시로 채워보기"</b>를 눌러보세요. 만들어진 글은 복사해서 스마트스토어·인스타그램에
+            바로 붙여 쓰시면 됩니다.
           </div>
         </>
       )}

@@ -42,3 +42,12 @@ export const clean = (text) =>
     .trim();
 
 export const won = (n) => `${Math.round(n || 0).toLocaleString('ko-KR')}원`;
+
+// "설거지가 편한 도마" + "원목 도마" 처럼 끝 단어가 겹칠 때 앞쪽 겹침을 덜어낸다.
+export const trimOverlap = (lead, product) => {
+  if (!lead || !product) return lead || '';
+  const a = lead.trim().split(/\s+/);
+  const b = product.trim().split(/\s+/);
+  while (a.length > 1 && b.length && a[a.length - 1] === b[b.length - 1]) a.pop();
+  return a.join(' ');
+};

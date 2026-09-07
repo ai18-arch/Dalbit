@@ -62,3 +62,23 @@ export const TARGET_PRESETS = [
   '선물 찾는 분',
   '반려인',
 ];
+
+// 가격대 — 문구의 분위기를 정할 때 쓴다. (선택 안 해도 됨)
+export const PRICE_BANDS = [
+  { label: '1만원 이하', words: ['부담 없는', '가볍게 쓰는'], keyword: '가성비' },
+  { label: '1~3만원', words: ['부담 없이 좋은', '실속 있는'], keyword: '실속' },
+  { label: '3~5만원', words: ['제대로 만든', '오래 쓰는'], keyword: '데일리' },
+  { label: '5~10만원', words: ['한 번 사서 오래 쓰는', '믿고 쓰는'], keyword: '선물용' },
+  { label: '10만원 이상', words: ['제대로 갖춘', '아끼며 쓰는'], keyword: '프리미엄' },
+];
+
+export const bandOf = (label) => PRICE_BANDS.find((b) => b.label === label) || null;
+
+// 쇼츠 영상 길이. 길이에 따라 장면 구성이 달라진다.
+export const DURATIONS = [
+  { id: '15', label: '15초', desc: '짧고 강하게 · 조회수용' },
+  { id: '30', label: '30초', desc: '가장 무난해요 · 추천' },
+  { id: '60', label: '60초', desc: '자세히 설명 · 신뢰용' },
+];
+
+export const durationOf = (id) => DURATIONS.find((d) => d.id === id) || DURATIONS[1];

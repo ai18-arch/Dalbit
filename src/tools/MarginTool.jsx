@@ -76,8 +76,8 @@ export default function MarginTool() {
         />
         <MoneyField
           id="cost"
-          label="상품 원가"
-          hint="사입가 또는 제작비"
+          label="매입가 (상품 원가)"
+          hint="사입가 또는 만드는 데 든 돈"
           value={v.cost}
           onChange={set('cost')}
           placeholder="8,000"
@@ -107,11 +107,27 @@ export default function MarginTool() {
 
         <MoneyField
           id="shipping"
-          label="내가 부담하는 배송비"
-          hint="무료배송이면 택배비를 적어주세요"
+          label="배송비"
+          hint="무료배송이면 내가 내는 택배비를 적어주세요"
           value={v.shipping}
           onChange={set('shipping')}
           placeholder="3,000"
+        />
+        <MoneyField
+          id="ad"
+          label="광고비"
+          hint="한 개 팔 때 들어가는 광고비"
+          value={v.ad}
+          onChange={set('ad')}
+          placeholder="1,000"
+        />
+        <MoneyField
+          id="etc"
+          label="기타 비용"
+          hint="포장비, 결제 수수료, 반품 예상분 등"
+          value={v.etc}
+          onChange={set('etc')}
+          placeholder="500"
         />
 
         {more ? (
@@ -119,31 +135,15 @@ export default function MarginTool() {
             <MoneyField
               id="packing"
               label="포장·부자재"
-              hint="박스, 스티커, 완충재 등"
+              hint="박스, 스티커, 완충재를 따로 관리할 때"
               value={v.packing}
               onChange={set('packing')}
               placeholder="500"
             />
             <MoneyField
-              id="ad"
-              label="광고비"
-              hint="한 개 팔 때 들어가는 금액"
-              value={v.ad}
-              onChange={set('ad')}
-              placeholder="1,000"
-            />
-            <MoneyField
-              id="etc"
-              label="기타 비용"
-              hint="결제 수수료, 반품 예상분 등"
-              value={v.etc}
-              onChange={set('etc')}
-              placeholder="0"
-            />
-            <MoneyField
               id="monthlyQty"
               label="한 달 예상 판매 수량"
-              hint="개수로 적어주세요"
+              hint="한 달에 몇 개 팔릴 것 같은지"
               value={v.monthlyQty}
               onChange={set('monthlyQty')}
               placeholder="100"
@@ -152,7 +152,7 @@ export default function MarginTool() {
           </>
         ) : (
           <button className="btn-ghost" type="button" onClick={() => setMore(true)}>
-            ＋ 포장비·광고비도 넣어서 정확히 계산하기
+            ＋ 포장비를 따로 넣고, 한 달 수익까지 계산하기
           </button>
         )}
       </div>
