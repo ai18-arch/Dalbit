@@ -1,37 +1,38 @@
 /* ==========================================================================
    셀러메이트 AI — 디자인 토큰
-   아이보리 바탕 + 짙은 먹색 글자 + 황동(brass) 포인트.
+   블랙 바탕 + 베이비핑크 포인트(글씨·테두리).
    제목은 명조(Gowun Batang), 본문은 고딕(Noto Sans KR).
    ========================================================================== */
 
 :root {
-  --ivory: #faf7f2;
-  --ivory-2: #f4eee5;
-  --surface: #ffffff;
-  --surface-2: #fbf8f4;
+  color-scheme: dark;
 
-  --ink: #1c1815;
-  --ink-2: #4a423b;
-  --ink-3: #6f645b;
-  --muted: #9a8e82;
+  --bg: #0d0b0c;
+  --bg-2: #141112;
+  --surface: #171415;
+  --surface-2: #1d191b;
+  --surface-3: #241f21;
 
-  --line: #ebe3d8;
-  --line-2: #ddd1c2;
+  --text: #f4eff1;
+  --text-2: #cfc4c8;
+  --text-3: #a3969b;
+  --muted: #7d7175;
 
-  --accent: #8a5a46;
-  --accent-deep: #6d4535;
-  --accent-soft: #f4ebe4;
+  --line: #2a2427;
+  --line-2: #3a3236;
 
-  --brass: #ab8a58;
-  --brass-2: #c4a878;
-  --brass-soft: #f3ecdf;
+  /* 포인트 — 베이비핑크 */
+  --pink: #f6c6d7;
+  --pink-soft: #fbe1e9;
+  --pink-deep: #e8a5be;
+  --pink-dim: rgba(246, 198, 215, 0.14);
+  --pink-line: rgba(246, 198, 215, 0.32);
 
-  --green: #40705c;
-  --red: #a4463d;
+  --green: #86d6b3;
+  --red: #f09a92;
 
-  --shadow-xs: 0 1px 2px rgba(28, 24, 21, 0.03);
-  --shadow-sm: 0 1px 2px rgba(28, 24, 21, 0.03), 0 6px 18px -12px rgba(28, 24, 21, 0.14);
-  --shadow-md: 0 2px 4px rgba(28, 24, 21, 0.04), 0 16px 34px -18px rgba(28, 24, 21, 0.2);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45), 0 18px 40px -20px rgba(0, 0, 0, 0.9);
 
   --r-lg: 18px;
   --r-md: 14px;
@@ -53,11 +54,11 @@ body {
 }
 
 body {
-  background: var(--ivory);
-  background-image: radial-gradient(130% 60% at 8% -6%, #fdfaf5 0%, transparent 58%),
-    radial-gradient(100% 45% at 100% 0%, #f6f0e6 0%, transparent 52%);
+  background: var(--bg);
+  background-image: radial-gradient(120% 55% at 10% -8%, rgba(246, 198, 215, 0.09) 0%, transparent 60%),
+    radial-gradient(90% 40% at 100% 2%, rgba(246, 198, 215, 0.05) 0%, transparent 55%);
   background-attachment: fixed;
-  color: var(--ink);
+  color: var(--text);
   font-family: var(--sans);
   font-size: 15px;
   font-weight: 400;
@@ -117,12 +118,13 @@ button {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: var(--ink);
-  color: var(--brass-2);
+  background: var(--pink);
+  color: #14100f;
   display: grid;
   place-items: center;
   font-family: var(--serif);
   font-size: 18px;
+  font-weight: 700;
   line-height: 1;
   padding-bottom: 2px;
 }
@@ -137,12 +139,13 @@ button {
   font-family: var(--serif);
   font-size: 16.5px;
   letter-spacing: -0.2px;
+  color: var(--text);
 }
 
 .topbar .logo-en {
   font-size: 8.5px;
   letter-spacing: 0.22em;
-  color: var(--muted);
+  color: var(--pink);
   font-weight: 500;
   margin-top: 1px;
 }
@@ -164,16 +167,19 @@ button {
   padding: 10px 17px 10px 14px;
   border-radius: 999px;
   background: var(--surface);
-  border: 1px solid var(--line);
-  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+  color: var(--text-2);
   font-size: 13.5px;
-  box-shadow: var(--shadow-xs);
   transition: border-color 0.18s ease, color 0.18s ease;
 }
 
+.back-btn .icon {
+  color: var(--pink);
+}
+
 .back-btn:active {
-  border-color: var(--line-2);
-  color: var(--accent);
+  border-color: var(--pink-line);
+  color: var(--pink);
 }
 
 /* ---------- 첫 화면 ---------- */
@@ -186,7 +192,7 @@ button {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.16em;
-  color: var(--brass);
+  color: var(--pink);
   margin-bottom: 14px;
 }
 
@@ -197,17 +203,16 @@ button {
   line-height: 1.42;
   margin: 0 0 12px;
   letter-spacing: -0.8px;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .hero p {
   margin: 0;
-  color: var(--ink-3);
+  color: var(--text-3);
   font-size: 14px;
   font-weight: 300;
 }
 
-/* 가는 선 + 마름모 — 편집 디자인의 구분선 */
 .rule {
   display: flex;
   align-items: center;
@@ -224,12 +229,13 @@ button {
 .rule span:first-child {
   max-width: 34px;
   flex: 0 0 34px;
+  background: var(--pink-line);
 }
 
 .rule i {
   width: 4px;
   height: 4px;
-  background: var(--brass-2);
+  background: var(--pink);
   transform: rotate(45deg);
   flex: 0 0 4px;
 }
@@ -245,18 +251,18 @@ button {
   gap: 15px;
   width: 100%;
   text-align: left;
-  padding: 18px 18px;
+  padding: 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  box-shadow: var(--shadow-xs);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .tool-card:hover {
   transform: translateY(-2px);
+  background: var(--surface-2);
   box-shadow: var(--shadow-md);
-  border-color: var(--line-2);
+  border-color: var(--pink-line);
 }
 
 .tool-card:active {
@@ -268,17 +274,16 @@ button {
   height: 46px;
   flex: 0 0 46px;
   border-radius: 50%;
-  border: 1px solid var(--line-2);
-  background: var(--surface-2);
-  color: var(--accent);
+  border: 1px solid var(--pink-line);
+  background: var(--pink-dim);
+  color: var(--pink);
   display: grid;
   place-items: center;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .tool-card:hover .card-mark {
-  border-color: var(--brass-2);
-  background: var(--brass-soft);
+  background: rgba(246, 198, 215, 0.22);
 }
 
 .tool-card .body {
@@ -294,6 +299,7 @@ button {
   font-weight: 700;
   letter-spacing: -0.4px;
   margin-bottom: 3px;
+  color: var(--text);
 }
 
 .tool-card .desc {
@@ -311,12 +317,17 @@ button {
   flex: 0 0 auto;
 }
 
+.tool-card:hover .chev {
+  color: var(--pink);
+}
+
 .home-note {
   margin-top: 26px;
-  padding: 20px 20px 21px;
+  padding: 20px;
   border-radius: var(--r-md);
-  background: var(--surface-2);
+  background: var(--surface);
   border: 1px solid var(--line);
+  border-left: 2px solid var(--pink-line);
 }
 
 .home-note .note-label {
@@ -324,7 +335,7 @@ button {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.16em;
-  color: var(--brass);
+  color: var(--pink);
   margin-bottom: 9px;
 }
 
@@ -333,12 +344,12 @@ button {
   font-size: 12.8px;
   font-weight: 300;
   line-height: 1.85;
-  color: var(--ink-3);
+  color: var(--text-3);
 }
 
 .home-note b {
   font-weight: 500;
-  color: var(--ink-2);
+  color: var(--pink-soft);
 }
 
 /* ---------- 도구 화면 머리말 ---------- */
@@ -351,13 +362,12 @@ button {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: 1px solid var(--line-2);
-  background: var(--surface);
-  color: var(--accent);
+  border: 1px solid var(--pink-line);
+  background: var(--pink-dim);
+  color: var(--pink);
   display: grid;
   place-items: center;
   margin-bottom: 15px;
-  box-shadow: var(--shadow-xs);
 }
 
 .tool-head h2 {
@@ -370,7 +380,7 @@ button {
 
 .tool-head p {
   margin: 0;
-  color: var(--ink-3);
+  color: var(--text-3);
   font-size: 13.4px;
   font-weight: 300;
   line-height: 1.75;
@@ -391,7 +401,7 @@ button {
   gap: 7px;
   font-size: 12px;
   font-weight: 300;
-  color: var(--ink-3);
+  color: var(--text-3);
 }
 
 .steps .n {
@@ -399,8 +409,8 @@ button {
   height: 19px;
   flex: 0 0 19px;
   border-radius: 50%;
-  border: 1px solid var(--line-2);
-  color: var(--brass);
+  border: 1px solid var(--pink-line);
+  color: var(--pink);
   font-size: 10px;
   font-weight: 700;
   display: grid;
@@ -414,7 +424,6 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 22px 20px;
-  box-shadow: var(--shadow-sm);
 }
 
 .panel + .panel {
@@ -432,7 +441,7 @@ button {
   font-size: 12.4px;
   font-weight: 300;
   line-height: 1.7;
-  color: var(--ink-3);
+  color: var(--text-3);
 }
 
 .form-guide span {
@@ -442,7 +451,7 @@ button {
 
 .form-guide b {
   font-weight: 500;
-  color: var(--accent);
+  color: var(--pink);
 }
 
 .link-btn {
@@ -450,18 +459,17 @@ button {
   min-height: 40px;
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--line-2);
-  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--pink-line);
+  color: var(--pink);
   font-size: 12.5px;
   font-weight: 500;
   letter-spacing: -0.1px;
-  transition: background 0.18s ease, border-color 0.18s ease;
+  transition: background 0.18s ease;
 }
 
 .link-btn:active {
-  background: var(--accent-soft);
-  border-color: var(--accent);
+  background: var(--pink-dim);
 }
 
 .field {
@@ -478,7 +486,7 @@ button {
   font-weight: 700;
   margin-bottom: 7px;
   letter-spacing: -0.2px;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .field .hint {
@@ -510,12 +518,12 @@ button {
 }
 
 .req {
-  background: var(--accent);
-  color: #fff;
+  background: var(--pink);
+  color: #14100f;
 }
 
 .opt {
-  background: var(--ivory-2);
+  background: var(--surface-3);
   color: var(--muted);
 }
 
@@ -528,12 +536,12 @@ button {
   padding: 13px 15px;
   font-size: 16px; /* 16px 미만이면 아이폰에서 화면이 확대됩니다 */
   font-weight: 400;
-  color: var(--ink);
+  color: var(--text);
   border-radius: var(--r-sm);
   border: 1px solid var(--line-2);
-  background: var(--surface-2);
+  background: var(--bg-2);
   outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .field textarea {
@@ -545,14 +553,13 @@ button {
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-  border-color: var(--accent);
-  background: var(--surface);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pink-dim);
 }
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: #bfb2a5;
+  color: #6a5f63;
   font-weight: 300;
 }
 
@@ -586,10 +593,10 @@ button {
   padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid var(--line-2);
-  background: var(--surface-2);
+  background: var(--bg-2);
   font-size: 13.5px;
   font-weight: 400;
-  color: var(--ink-2);
+  color: var(--text-2);
   transition: all 0.18s ease;
 }
 
@@ -598,9 +605,9 @@ button {
 }
 
 .chip.on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #14100f;
   font-weight: 500;
 }
 
@@ -609,9 +616,9 @@ button {
   margin-top: 12px;
   padding: 14px 16px;
   border-radius: var(--r-sm);
-  background: var(--surface-2);
+  background: var(--pink-dim);
   border: 1px solid var(--line);
-  border-left: 2px solid var(--brass-2);
+  border-left: 2px solid var(--pink);
 }
 
 .tone-desc {
@@ -619,7 +626,7 @@ button {
   font-size: 10.5px;
   font-weight: 500;
   letter-spacing: 0.12em;
-  color: var(--brass);
+  color: var(--pink);
   margin-bottom: 6px;
 }
 
@@ -628,7 +635,7 @@ button {
   font-family: var(--serif);
   font-size: 14px;
   line-height: 1.75;
-  color: var(--ink-2);
+  color: var(--text);
   letter-spacing: -0.2px;
 }
 
@@ -644,8 +651,9 @@ button {
   padding: 13px 6px;
   border-radius: var(--r-sm);
   border: 1px solid var(--line-2);
-  background: var(--surface-2);
+  background: var(--bg-2);
   text-align: center;
+  color: var(--text-2);
   transition: all 0.18s ease;
 }
 
@@ -671,13 +679,13 @@ button {
 }
 
 .option.on {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #14100f;
 }
 
 .option.on .o-desc {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(20, 16, 15, 0.66);
 }
 
 /* ---------- 버튼 ---------- */
@@ -692,27 +700,27 @@ button {
   margin-top: 24px;
   padding: 17px;
   border-radius: var(--r-md);
-  background: var(--ink);
-  color: #fff;
+  background: var(--pink);
+  color: #14100f;
   font-size: 15.5px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.1px;
-  box-shadow: 0 10px 26px -14px rgba(28, 24, 21, 0.7);
+  box-shadow: 0 12px 30px -16px rgba(246, 198, 215, 0.7);
   transition: transform 0.18s ease, background 0.18s ease;
 }
 
 .btn-primary .icon {
-  color: var(--brass-2);
+  color: #14100f;
 }
 
 .btn-primary:active {
   transform: scale(0.99);
-  background: #2b2420;
+  background: var(--pink-deep);
 }
 
 .btn-primary:disabled {
-  background: var(--ivory-2);
-  color: #b3a698;
+  background: var(--surface-3);
+  color: var(--muted);
   box-shadow: none;
   cursor: not-allowed;
 }
@@ -723,17 +731,18 @@ button {
   margin-top: 12px;
   padding: 14px;
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: transparent;
   border: 1px solid var(--line-2);
-  color: var(--ink-2);
+  color: var(--text-2);
   font-size: 13.8px;
   font-weight: 400;
+  transition: all 0.18s ease;
 }
 
 .btn-ghost:active {
   transform: scale(0.99);
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--pink);
+  color: var(--pink);
 }
 
 .form-hint {
@@ -801,7 +810,7 @@ button {
   padding: 14px 8px;
   border-radius: var(--r-md);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.2px;
   transition: all 0.18s ease;
 }
@@ -811,13 +820,13 @@ button {
 }
 
 .act-copy {
-  background: var(--ink);
-  color: #fff;
-  box-shadow: 0 8px 20px -12px rgba(28, 24, 21, 0.65);
+  background: var(--pink);
+  color: #14100f;
+  box-shadow: 0 10px 26px -16px rgba(246, 198, 215, 0.7);
 }
 
 .act-copy .icon {
-  color: var(--brass-2);
+  color: #14100f;
 }
 
 .act-copy.done {
@@ -825,27 +834,25 @@ button {
   box-shadow: none;
 }
 
-.act-copy.done .icon {
-  color: #fff;
-}
-
 .act-again {
-  background: var(--surface);
-  border: 1px solid var(--line-2);
-  color: var(--ink-2);
+  background: transparent;
+  border: 1px solid var(--pink-line);
+  color: var(--pink);
+  font-weight: 500;
 }
 
 .act-again .icon {
-  color: var(--accent);
+  color: var(--pink);
 }
 
 .result-hint {
   margin-bottom: 14px;
   padding: 14px 16px;
   border-radius: var(--r-sm);
-  background: var(--brass-soft);
-  border: 1px solid #e8dcc4;
-  color: #6d5a3c;
+  background: var(--pink-dim);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--pink);
+  color: var(--pink-soft);
   font-size: 12.4px;
   font-weight: 300;
   line-height: 1.75;
@@ -856,7 +863,6 @@ button {
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   padding: 17px 18px;
-  box-shadow: var(--shadow-xs);
 }
 
 .result-card + .result-card {
@@ -874,16 +880,18 @@ button {
   display: inline-block;
   padding: 4px 11px;
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent-deep);
+  background: var(--pink-dim);
+  border: 1px solid var(--pink-line);
+  color: var(--pink);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
 .tag.lilac {
-  background: var(--brass-soft);
-  color: #7a6338;
+  background: transparent;
+  border-color: var(--line-2);
+  color: var(--text-3);
 }
 
 .result-text {
@@ -891,7 +899,7 @@ button {
   font-size: 14.2px;
   font-weight: 400;
   line-height: 1.85;
-  color: var(--ink-2);
+  color: var(--text-2);
   margin: 0;
   font-family: inherit;
 }
@@ -902,7 +910,7 @@ button {
   font-weight: 700;
   letter-spacing: -0.4px;
   line-height: 1.6;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .result-note {
@@ -918,7 +926,7 @@ button {
 }
 
 .result-note .icon {
-  color: var(--brass-2);
+  color: var(--pink);
   margin-top: 3px;
 }
 
@@ -932,31 +940,31 @@ button {
   margin-top: 14px;
   padding: 12px;
   border-radius: var(--r-sm);
-  border: 1px solid var(--line-2);
+  border: 1px solid var(--pink-line);
   font-size: 13.5px;
-  font-weight: 400;
-  color: var(--ink-2);
-  background: var(--surface-2);
+  font-weight: 500;
+  color: var(--pink);
+  background: transparent;
   transition: all 0.18s ease;
 }
 
 .copy-btn .icon {
-  color: var(--accent);
+  color: var(--pink);
 }
 
 .copy-btn:active {
   transform: scale(0.98);
-  border-color: var(--accent);
+  background: var(--pink-dim);
 }
 
 .copy-btn.done {
   background: var(--green);
   border-color: var(--green);
-  color: #fff;
+  color: #10201a;
 }
 
 .copy-btn.done .icon {
-  color: #fff;
+  color: #10201a;
 }
 
 /* ---------- 팁 ---------- */
@@ -965,7 +973,7 @@ button {
   margin-top: 18px;
   padding: 19px 20px;
   border-radius: var(--r-md);
-  background: var(--surface-2);
+  background: var(--surface);
   border: 1px solid var(--line);
 }
 
@@ -977,23 +985,24 @@ button {
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: -0.1px;
+  color: var(--text);
 }
 
 .tips h4 .icon {
-  color: var(--brass);
+  color: var(--pink);
 }
 
 .tips ul {
   margin: 0;
   padding-left: 16px;
-  color: var(--ink-3);
+  color: var(--text-3);
   font-size: 12.4px;
   font-weight: 300;
   line-height: 1.9;
 }
 
 .tips li::marker {
-  color: var(--brass-2);
+  color: var(--pink);
 }
 
 /* ---------- 계산기 ---------- */
@@ -1006,9 +1015,9 @@ button {
 }
 
 .stat {
-  padding: 17px 17px;
+  padding: 17px;
   border-radius: var(--r-md);
-  background: var(--surface-2);
+  background: var(--bg-2);
   border: 1px solid var(--line);
 }
 
@@ -1030,7 +1039,7 @@ button {
   font-weight: 700;
   letter-spacing: -0.8px;
   font-variant-numeric: tabular-nums;
-  color: var(--ink);
+  color: var(--pink);
   line-height: 1.25;
 }
 
@@ -1062,7 +1071,7 @@ button {
   padding: 10px 2px;
   font-size: 13.2px;
   font-weight: 300;
-  color: var(--ink-2);
+  color: var(--text-3);
   border-bottom: 1px solid var(--line);
 }
 
@@ -1073,13 +1082,13 @@ button {
 .breakdown .row span:last-child {
   font-variant-numeric: tabular-nums;
   font-weight: 400;
-  color: var(--ink);
+  color: var(--text-2);
 }
 
 .breakdown .row.total {
   font-weight: 700;
-  color: var(--ink);
-  border-top: 1px solid var(--line-2);
+  color: var(--text);
+  border-top: 1px solid var(--pink-line);
   border-bottom: none;
   margin-top: 5px;
   padding-top: 13px;
@@ -1089,6 +1098,7 @@ button {
   font-family: var(--serif);
   font-size: 16px;
   font-weight: 700;
+  color: var(--pink);
 }
 
 .suggest-grid {
@@ -1101,7 +1111,7 @@ button {
 .suggest {
   padding: 14px 8px;
   border-radius: var(--r-sm);
-  background: var(--surface-2);
+  background: var(--bg-2);
   border: 1px solid var(--line-2);
   text-align: center;
 }
@@ -1119,6 +1129,7 @@ button {
   font-weight: 700;
   letter-spacing: -0.4px;
   font-variant-numeric: tabular-nums;
+  color: var(--pink);
 }
 
 /* ---------- 기타 ---------- */
@@ -1140,7 +1151,7 @@ button {
   font-size: 9.5px;
   font-weight: 500;
   letter-spacing: 0.22em;
-  color: var(--brass);
+  color: var(--pink);
 }
 
 .fade-in {
