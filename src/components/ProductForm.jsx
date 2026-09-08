@@ -16,6 +16,7 @@ export default function ProductForm({
   const set = (key) => (e) => onChange({ ...value, [key]: e.target.value });
   const toggle = (key, v) => onChange({ ...value, [key]: value[key] === v ? '' : v });
   const ready = value.product.trim().length > 0;
+  const tone = TONES.find((t) => t.id === value.tone);
   const filled = [value.featuresRaw, value.benefit, value.target, value.priceBand || value.price].filter(
     (x) => x && x.trim(),
   ).length;
@@ -173,12 +174,18 @@ export default function ProductForm({
 
       <div className="field">
         <label>원하는 분위기</label>
-        <p className="field-help">문구의 말투가 이 분위기로 맞춰집니다.</p>
+        <p className="field-help">문구의 말투가 이 분위기로 맞춰집니다. 눌러보면 예문이 바뀝니다.</p>
         <ChipGroup
           options={TONES.map((t) => t.label)}
-          value={TONES.find((t) => t.id === value.tone)?.label}
+          value={tone?.label}
           onSelect={(label) => onChange({ ...value, tone: TONES.find((t) => t.label === label).id })}
         />
+        {tone && (
+          <div className="tone-preview">
+            <span className="tone-desc">{tone.desc}</span>
+            <p className="tone-sample">“{tone.sample}”</p>
+          </div>
+        )}
       </div>
 
       <button className="btn-primary" onClick={onSubmit} disabled={!ready} type="button">

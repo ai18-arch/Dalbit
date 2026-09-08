@@ -604,6 +604,34 @@ button {
   font-weight: 500;
 }
 
+/* 고른 말투의 느낌을 보여주는 예문 */
+.tone-preview {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--brass-2);
+}
+
+.tone-desc {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--brass);
+  margin-bottom: 6px;
+}
+
+.tone-sample {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--ink-2);
+  letter-spacing: -0.2px;
+}
+
 /* 영상 길이 같은 큰 선택 버튼 */
 .option-row {
   display: grid;

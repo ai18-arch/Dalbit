@@ -19,9 +19,13 @@ const normalize = (input) => {
     f1: features[0] || '',
     f2: features[1] || '',
     f3: features[2] || '',
-    // 강조 장점이 있으면 그것을, 없으면 첫 번째 특징을 앞세운다.
-    // 상품명과 끝 단어가 겹치면 (예: "설거지가 편한 도마" + "원목 도마") 겹침을 덜어낸다.
+    // 같은 내용이라도 문장에서 놓이는 자리에 따라 형태가 달라야 조사가 맞는다.
+    // lead   : 상품명 바로 앞 (예: "설거지가 편한" + "원목 도마") — 겹치는 끝 단어는 덜어낸다
+    // phrase : 홀로 쓰이는 자리 (예: "설거지가 편한 도마 찾는 분")
+    // noun   : 조사가 붙는 자리 (예: "국내 제작이 중요한 분") — 명사형인 특징을 우선 쓴다
     lead: trimOverlap((input.benefit || '').trim() || features[0] || '', product),
+    phrase: (input.benefit || '').trim() || features[0] || '',
+    noun: features[0] || (input.benefit || '').trim() || '',
     tone: toneOf(input.tone),
     duration: durationOf(input.duration),
     seed: seedOf(
@@ -140,16 +144,21 @@ export const generateDetailPage = (input) => {
   const ending = pick(t.endings, s);
   const cta = pick(t.ctas, s);
 
+  const hook2 = pick(t.hooks, s + 1);
+  const mod = pick(t.modifiers, s);
   const headlines = [
-    d.benefit ? `${d.benefit}, ${d.product}` : `${hook} ${d.product}`,
-    `${d.lead ? `${d.lead}, ` : ''}${withParticle(d.product, '은/는')} 이걸로 끝내세요`,
-    `${withParticle(target, '을/를')} 위해 ${d.lead ? `${d.lead}까지 ` : ''}챙긴 ${d.product}`,
+    d.benefit ? `${[d.lead, d.product].filter(Boolean).join(' ')}` : `${hook} ${d.product}`,
+    d.benefit ? `${hook} ${d.product}` : `${hook2} ${[d.lead, d.product].filter(Boolean).join(' ')}`,
+    `${withParticle(target, '을/를')} 위한 ${[mod, d.product].filter(Boolean).join(' ')}`,
   ].map((h) => clean(h));
 
+  // 격식 있는 분위기에서는 '합니다체'로, 그 외에는 '해요체'로 쓴다.
+  const f = (casual, formal) => (t.formal ? formal : casual);
+
   const painPoints = [
-    d.lead ? `${d.lead} — 이런 상품, 생각보다 찾기 어려우셨죠?` : '마음에 쏙 드는 걸 찾기가 참 어렵죠.',
+    d.phrase ? `${d.phrase} — 이런 상품, 생각보다 찾기 어려우셨죠?` : '마음에 쏙 드는 걸 찾기가 참 어렵죠.',
     '싸게 사면 금방 아쉽고, 좋은 건 너무 부담스럽고.',
-    '고민하다 결국 미뤄두신 분들을 위해 준비했어요.',
+    f('고민하다 결국 미뤄두신 분들을 위해 준비했어요.', '고민만 길어지신 분들을 위해 준비했습니다.'),
   ];
 
   const bullets = d.features.length
@@ -163,48 +172,48 @@ ${painPoints.join('\n')}
 
 ━━━━━━━━━━━━━━━━━━
 
-■ 이런 분께 추천해요
+■ ${f('이런 분께 추천해요', '이런 분께 권합니다')}
 
 · ${target}
-· ${d.lead ? `${withParticle(d.lead, '이/가')} 중요한 분` : '오래 쓸 물건을 찾는 분'}
+· ${d.noun ? `${withParticle(d.noun, '이/가')} 중요한 분` : '오래 쓸 물건을 찾는 분'}
 · ${d.f2 ? `${d.f2}까지 챙기고 싶은 분` : '고민만 오래 하신 분'}
 · 선물할 곳이 필요한 분
 
 ━━━━━━━━━━━━━━━━━━
 
-■ ${d.product}, 이런 점이 좋아요
+■ ${d.product}${f(', 이런 점이 좋아요', ' 의 특징')}
 
 ${bullets.join('\n\n')}
 
 ━━━━━━━━━━━━━━━━━━
 
-■ 이렇게 써보세요
+■ ${f('이렇게 써보세요', '사용 안내')}
 
-· ${pick(['아침에 나가기 전 한 번', '퇴근하고 집에 와서', '주말에 여유 있게'], s)} 사용하면 가장 좋아요.
-· ${d.lead ? `${d.lead} 덕분에 처음 쓰는 분도 어렵지 않아요.` : '처음 쓰는 분도 설명서 없이 바로 쓸 수 있어요.'}
+· ${pick(['아침에 나가기 전 한 번', '퇴근하고 집에 와서', '주말에 여유 있게'], s)} ${f('사용하면 가장 좋아요.', '사용하시면 가장 좋습니다.')}
+· ${d.noun ? `${d.noun} 덕분에 처음 쓰는 분도 ${f('어렵지 않아요.', '어렵지 않습니다.')}` : f('처음 쓰는 분도 설명서 없이 바로 쓸 수 있어요.', '처음 사용하시는 분도 설명서 없이 바로 쓰실 수 있습니다.')}
 · 관리는 간단하게. 오래 쓰려면 ${pick(['직사광선을 피해 보관', '물기 없이 건조 보관', '사용 후 가볍게 닦아 보관'], s + 2)}해 주세요.
 
 ━━━━━━━━━━━━━━━━━━
 
-■ 구매 전 확인해 주세요
+■ ${f('구매 전 확인해 주세요', '구매 전 안내')}
 
 · 상품 정보: ${[d.category, d.product].filter(Boolean).join(' / ')}
 · 가격: ${d.price ? `${d.price}` : '상단 옵션에서 확인해 주세요'}
 · 배송: 오후 2시 이전 결제 시 당일 출고 (주말·공휴일 제외)
 · 교환·반품: 수령 후 7일 이내 가능 (사용 흔적이 있는 경우 제한)
-· 모니터 환경에 따라 색상이 조금 다르게 보일 수 있어요.
+· 모니터 환경에 따라 색상이 조금 다르게 보일 수 ${f('있어요.', '있습니다.')}
 
 ━━━━━━━━━━━━━━━━━━
 
-${withParticle(d.product, '을/를')} 고민하고 계셨다면, 지금이 좋은 때예요.
-${d.lead ? `${d.lead}까지 신경 써서 ` : ''}${ending}
+${withParticle(d.product, '을/를')} 고민하고 계셨다면, ${f('지금이 좋은 때예요.', '지금이 좋은 때입니다.')}
+${d.noun ? `${d.noun}까지 신경 써서 ` : ''}${ending}
 
 ${cta}
 `);
 
   const faq = clean(`
 Q. 처음 사도 괜찮을까요?
-A. 네, 처음 쓰시는 분이 가장 많이 찾는 상품이에요. ${d.lead ? `${withParticle(d.lead, '이/가')} 있어 어렵지 않습니다.` : '어렵지 않게 바로 사용하실 수 있어요.'}
+A. 네, 처음 쓰시는 분이 가장 많이 찾는 상품이에요. ${d.noun ? `${withParticle(d.noun, '이/가')} 있어 어렵지 않습니다.` : '어렵지 않게 바로 사용하실 수 있어요.'}
 
 Q. 선물용으로도 괜찮나요?
 A. 네, 요청 주시면 포장해서 보내드려요. 가격표는 빼고 발송합니다.
@@ -234,12 +243,20 @@ A. 상품 문의 게시판이나 채팅으로 남겨주시면 빠르게 답변�
 
 // 특징을 고객 입장의 이득으로 바꿔 말해준다.
 const featureBenefit = (d, i) => {
-  const lines = [
-    `쓰면서 아쉬운 순간이 확 줄어드는 부분이에요.`,
-    `그래서 ${d.target || '쓰는 사람'} 입장에선 손이 훨씬 덜 갑니다.`,
-    `작은 차이지만, 매일 쓰면 확실히 느껴져요.`,
-    `이 점 때문에 다시 찾아주시는 분이 많아요.`,
-  ];
+  const formal = d.tone.formal;
+  const lines = formal
+    ? [
+        `쓰면서 아쉬운 순간을 줄여주는 부분입니다.`,
+        `${d.target || '사용하시는 분'} 입장에서 손이 훨씬 덜 갑니다.`,
+        `작은 차이지만 매일 쓰면 분명하게 느껴집니다.`,
+        `이 점 때문에 다시 찾아주시는 분이 많습니다.`,
+      ]
+    : [
+        `쓰면서 아쉬운 순간이 확 줄어드는 부분이에요.`,
+        `그래서 ${d.target || '쓰는 사람'} 입장에선 손이 훨씬 덜 갑니다.`,
+        `작은 차이지만, 매일 쓰면 확실히 느껴져요.`,
+        `이 점 때문에 다시 찾아주시는 분이 많아요.`,
+      ];
   // 특징마다 다른 설명이 붙도록 순서대로 돌린다.
   return lines[(Math.abs(d.seed) + i) % lines.length];
 };
@@ -259,9 +276,9 @@ export const generateInstagram = (input) => {
     {
       tag: '스토리텔링형',
       text: clean(`
-${e[0]} ${d.benefit || pick(t.hooks, s)} ${d.product}
+${e[0]} ${d.benefit ? d.lead : pick(t.hooks, s)} ${d.product}
 
-${d.lead ? `${d.lead} 하나 때문에 이거 만들었어요.` : '별거 아닌 것 같아도, 이게 제일 어려웠어요.'}
+${d.noun ? `${d.noun} 하나 때문에 이거 만들었어요.` : '별거 아닌 것 같아도, 이게 제일 어려웠어요.'}
 ${d.f2 ? `${d.f2}까지 챙기느라 시간이 좀 걸렸지만요.` : '몇 번을 다시 만들었는지 몰라요.'}
 
 써보신 분들이 ${pick(['"이거 왜 이제 알았지"', '"생각보다 훨씬 좋다"', '"하나 더 살까 고민된다"'], s)}라고
@@ -283,8 +300,8 @@ ${hashtags}
       text: clean(`
 ${d.product} 고를 때 꼭 볼 것 3가지 ${e[3] || '📌'}
 
-1️⃣ ${d.lead || '오래 쓸 수 있는지'}
-　 ${d.lead ? '여기서 만족도가 거의 갈려요.' : '싼 걸 두 번 사는 게 더 비싸요.'}
+1️⃣ ${d.phrase || '오래 쓸 수 있는지'}
+　 ${d.phrase ? '여기서 만족도가 거의 갈려요.' : '싼 걸 두 번 사는 게 더 비싸요.'}
 
 2️⃣ ${d.f2 || '내 상황에 맞는 크기인지'}
 　 사기 전에 한 번만 확인해 보세요.
@@ -307,7 +324,7 @@ ${hashtags}
       text: clean(`
 ${e[0]} ${d.product} ${pick(['오픈 기념 이벤트', '재입고 알림', '이번 주만 특가'], s)} ${e[0]}
 
-${d.lead ? `${d.lead} 그대로,` : '구성 그대로,'}
+${d.phrase ? `${d.phrase} 그대로,` : '구성 그대로,'}
 ${d.price ? `${d.price}` : '가격은 프로필 링크에서 확인'} 🎁
 
 ✔️ 참여 방법
@@ -397,7 +414,7 @@ export const generateShorts = (input) => {
   const t = d.tone;
   const s = d.seed;
   const total = Number(d.duration.id);
-  const lead = d.lead || `${d.product} 고민`;
+  const lead = d.phrase || `${d.product} 고민`;
   const feats = d.features.length ? d.features : [lead, '오래 쓸 수 있어요', '관리가 편해요'];
 
   const memo = [
