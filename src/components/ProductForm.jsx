@@ -1,4 +1,5 @@
 import ChipGroup from './ChipGroup.jsx';
+import Icon from './Icon.jsx';
 import { CATEGORY_PRESETS, DURATIONS, PRICE_BANDS, TARGET_PRESETS, TONES } from '../lib/tones.js';
 
 // 카피 생성 도구들이 함께 쓰는 입력 폼.
@@ -181,7 +182,14 @@ export default function ProductForm({
       </div>
 
       <button className="btn-primary" onClick={onSubmit} disabled={!ready} type="button">
-        {ready ? `✨ ${submitLabel}` : '먼저 상품 이름을 적어주세요'}
+        {ready ? (
+          <>
+            <Icon name="spark" size={17} />
+            {submitLabel}
+          </>
+        ) : (
+          '먼저 상품 이름을 적어주세요'
+        )}
       </button>
       {ready && filled === 0 && (
         <p className="form-hint">

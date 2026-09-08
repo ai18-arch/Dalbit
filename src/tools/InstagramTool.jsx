@@ -12,7 +12,7 @@ export default function InstagramTool() {
   return (
     <>
       <ToolHead
-        emoji="📸"
+        icon="camera"
         title="인스타 홍보글 만들기"
         desc="해시태그까지 붙은 피드 글을 스타일별로 3개 만들어 드려요."
         steps={['상품 정보를 채우고', '마음에 드는 글을 복사해서', '인스타에 사진과 함께 올리기']}

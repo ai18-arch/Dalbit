@@ -153,8 +153,8 @@ export const generateDetailPage = (input) => {
   ];
 
   const bullets = d.features.length
-    ? d.features.map((f, i) => `${['①', '②', '③', '④', '⑤'][i] || '·'} ${f}\n   → ${featureBenefit(d, i)}`)
-    : ['① 매일 쓰기 좋은 기본기\n   → 화려하지 않아도, 손이 자주 가는 게 결국 잘 쓰는 물건이에요.'];
+    ? d.features.map((f, i) => `${['①', '②', '③', '④', '⑤'][i] || '·'} ${f}\n→ ${featureBenefit(d, i)}`)
+    : ['① 매일 쓰기 좋은 기본기\n→ 화려하지 않아도, 손이 자주 가는 게 결국 잘 쓰는 물건이에요.'];
 
   const body = clean(`
 ${headlines[0]}
@@ -363,21 +363,21 @@ const timeLabel = (from, to) => `${from}~${to}초`;
 // 장면 목록을 대본 글로 바꾼다.
 const renderScript = (title, scenes, memo) =>
   clean(`
-🎬 ${title}
+${title}
 
 ${scenes
     .map(
-      (sc) => `──────────────────
-${timeLabel(sc.from, sc.to)} · ${sc.name}
-──────────────────
-🗣 "${sc.say}"
-📺 화면: ${sc.shot}
-💬 자막: ${sc.caption}`,
+      (sc) => `■ ${timeLabel(sc.from, sc.to)} · ${sc.name}
+대사 | "${sc.say}"
+화면 | ${sc.shot}
+자막 | ${sc.caption}`,
     )
     .join('\n\n')}
 
-──────────────────
-📌 촬영 메모
+━━━━━━━━━━━━━━━━━━
+
+■ 촬영 메모
+
 ${memo.map((m) => `· ${m}`).join('\n')}
 `);
 
@@ -470,12 +470,12 @@ export const generateShorts = (input) => {
     scripts: [
       {
         tag: `${d.duration.label} 후킹형`,
-        text: renderScript(`[${d.duration.label} · 후킹형] ${d.product}`, build(hookBlocks), memo),
+        text: renderScript(`${d.product} · ${d.duration.label} 후킹형 대본`, build(hookBlocks), memo),
         note: '조회수를 늘리기 좋은 구성이에요. 처음 올리는 분께 추천해요.',
       },
       {
         tag: `${d.duration.label} 정보형`,
-        text: renderScript(`[${d.duration.label} · 정보형] ${d.product} 고르는 기준`, build(infoBlocks), memo),
+        text: renderScript(`${d.product} 고르는 기준 · ${d.duration.label} 정보형 대본`, build(infoBlocks), memo),
         note: '저장·공유가 잘 나오는 구성이에요. 팔로워를 모으기에 좋아요.',
       },
     ],

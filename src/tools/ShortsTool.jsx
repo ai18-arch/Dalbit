@@ -12,7 +12,7 @@ export default function ShortsTool() {
   return (
     <>
       <ToolHead
-        emoji="🎬"
+        icon="film"
         title="쇼츠 대본 만들기"
         desc="몇 초에 무엇을 찍고 어떤 말을 할지, 자막까지 정해서 알려드려요. 릴스·틱톡에도 그대로 쓸 수 있어요."
         steps={['상품 정보와 영상 길이를 고르고', '대본을 복사해서', '순서대로 찍기']}

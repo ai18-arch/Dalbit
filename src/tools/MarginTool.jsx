@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import ChipGroup from '../components/ChipGroup.jsx';
+import Icon from '../components/Icon.jsx';
 import ToolHead from '../components/ToolHead.jsx';
 import TipBox from '../components/TipBox.jsx';
 import { calcMargin } from '../lib/generators.js';
@@ -60,7 +61,7 @@ export default function MarginTool() {
   return (
     <>
       <ToolHead
-        emoji="💰"
+        icon="coin"
         title="판매가 / 마진 계산"
         desc="수수료와 배송비까지 넣어서, 한 개 팔면 실제로 얼마가 남는지 바로 계산해 드려요."
       />
@@ -152,7 +153,7 @@ export default function MarginTool() {
           </>
         ) : (
           <button className="btn-ghost" type="button" onClick={() => setMore(true)}>
-            ＋ 포장비를 따로 넣고, 한 달 수익까지 계산하기
+            포장비를 따로 넣고, 한 달 수익까지 계산하기
           </button>
         )}
       </div>
@@ -202,8 +203,9 @@ export default function MarginTool() {
               </div>
             </div>
 
-            <div className="result-note" style={{ borderTop: 'none', marginTop: 14 }}>
-              💡 {r.advice}
+            <div className="result-note" style={{ marginTop: 16 }}>
+              <Icon name="quote" size={13} />
+              <span>{r.advice}</span>
             </div>
           </div>
 
@@ -219,8 +221,9 @@ export default function MarginTool() {
                 </div>
               ))}
             </div>
-            <div className="result-note" style={{ borderTop: 'none' }}>
-              위 비용을 그대로 두고, 목표 마진율을 맞추려면 받아야 하는 금액이에요.
+            <div className="result-note">
+              <Icon name="quote" size={13} />
+              <span>위 비용을 그대로 두고, 목표 마진율을 맞추려면 받아야 하는 금액이에요.</span>
             </div>
           </div>
 

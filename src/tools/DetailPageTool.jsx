@@ -12,7 +12,7 @@ export default function DetailPageTool() {
   return (
     <>
       <ToolHead
-        emoji="📝"
+        icon="document"
         title="상세페이지 만들기"
         desc="첫 문구부터 자주 묻는 질문까지, 상세페이지에 그대로 붙여 쓸 문구를 만들어 드려요."
         steps={['상품 정보를 채우고', '본문 전체를 복사해서', '상세페이지에 붙여넣기']}
